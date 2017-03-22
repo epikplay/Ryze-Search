@@ -1,0 +1,36 @@
+{% extends 'ryze/base.html' %}
+
+{% block title_block %}
+	Ryze Search
+{% endblock %}
+
+{% block body_block %}
+	<div>
+ 		<form class="form-inline" id="image_search_form"
+			  method="post" action="{% url 'image-search' %}">
+ 		{% csrf_token %}
+ 		<div class="form-group">
+ 			<input class="form-control" type="text" size="50"
+ 				   name="query" value="" id="query" />
+ 		</div>
+ 		<button class="btn btn-primary" type="submit" name="submit"
+ 						value="Search">Image Search</button>
+		<button class="btn btn-secondary" type="submit" name="submit" formaction="{% url 'search' %}"
+ 						value="Search">Normal Search</button>				
+ 		</form>
+ 		<div>
+		{{ total_results }} results in {{ search_time }} seconds
+ 			{% if results %}
+ 			<div class="list-group">
+ 			{% for result in results %}
+ 				<div class="list-group-item">
+ 					<h4 class="list-group-item-heading">
+						{{ result.image.thumbnailLink }}
+ 						</h4>
+ 				</div>
+ 			{% endfor %}
+ 			</div>
+ 			{% endif %}
+ 		</div>
+ 	</div>
+{% endblock %}

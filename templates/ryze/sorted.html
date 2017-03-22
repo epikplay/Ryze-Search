@@ -6,20 +6,17 @@
 
 {% block body_block %}
 	<div>
-		<style>
-			.form-inline{ position:fixed }
-		</style>
- 		<form class="form-inline" id="search_form"
-			  method="post" action="{% url 'search' %}">
+ 		<form class="form-inline" id="sorted_search_form"
+			  method="post" action="{% url 'sorted' %}">
  		{% csrf_token %}
  		<div class="form-group">
  			<input class="form-control" type="text" size="50"
  				   name="query" value="" id="query" />
  		</div>
  		<button class="btn btn-primary" type="submit" name="submit"
- 						value="Search">Search</button>
-		<button class="btn btn-secondary" type="submit" name="submit" formaction="{% url 'sorted' %}"
- 						value="Search">Sort</button>				
+ 						value="Search">Sorted Search</button>
+		<button class="btn btn-secondary" type="submit" name="submit" formaction="{% url 'search' %}"
+ 						value="Search">Normal Search</button>				
  		</form>
  		<div>
 		{% for refinement_list in refinements %}

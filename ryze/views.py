@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from google_search import googlecse
-from googleapiclient.discovery import build
 from ryze.registration_form import UserProfileForm, UserForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+
+cse_instance = googlecse(CSE_ID='004192970191558059822:zzokqrg_eni',
+                             API_KEY='AIzaSyAjz8fLDQBNlMBLljPS8Q8VhIMYqU_opH8')
 
 
 # Create your views here.
@@ -15,32 +17,62 @@ def index(request):
 
 
 def search(request):
-    """
-    user_query = request.GET.get('query')
 
-    service = build("customsearch", "v1", developerKey="AIzaSyAjz8fLDQBNlMBLljPS8Q8VhIMYqU_opH8")
-    res = service.cse().list(q='database', cx='004192970191558059822:zzokqrg_eni',).execute()
-
-    """
-    """
-        for r in res['items']:
-        print r.keys()
-        print r['title']
-        print r['formattedUrl']
-        print
-    """
-
-    x = googlecse(CSE_ID='004192970191558059822:zzokqrg_eni', API_KEY='AIzaSyAjz8fLDQBNlMBLljPS8Q8VhIMYqU_opH8')
-    context_dict = {}
+    results = []
+    refinements = ''
+    time = 0
+    total_results = 0
     if request.method == 'POST':
         query = request.POST['query'].strip()
         if query:
-            y = x.results(query=query)
-            for result in y:
-                print result[1]['title']
-                print result[1].keys()
-            context_dict['results'] = result
-    return render(request, 'ryze/search.html', context=context_dict)
+            result_list = cse_instance.results(query=query)
+            refinements = cse_instance.refinements_list
+            time = cse_instance.formatted_search_time
+            total_results = cse_instance.formatted_total_results
+            for result in result_list:
+                results = result
+    return render(request, 'ryze/search.html', {'search_time': time,
+                                                'total_results': total_results,
+                                                'refinements': refinements,
+                                                'results': results})
+
+
+def image_search(request):
+
+    results = []
+    time = 0
+    total_results = 0
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+        if query:
+            result_list = cse_instance.image_results(query=query)
+            time = cse_instance.formatted_search_time
+            total_results = cse_instance.formatted_total_results
+            for result in result_list:
+                results = result
+    return render(request, 'ryze/image-search.html', {'search_time': time,
+                                                      'total_results': total_results,
+                                                      'results': results})
+
+
+def sorted_search(request):
+    results = []
+    refinements = ''
+    time = 0
+    total_results = 0
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+        if query:
+            result_list = cse_instance.sorted_results(query=query)
+            refinements = cse_instance.refinements_list
+            time = cse_instance.formatted_search_time
+            total_results = cse_instance.formatted_total_results
+            for result in result_list:
+                results = result
+    return render(request, 'ryze/sorted.html', {'search_time': time,
+                                                'total_results': total_results,
+                                                'refinements': refinements,
+                                                'results': results})
 
 
 def register(request):
