@@ -13,11 +13,14 @@
  			<input class="form-control" type="text" size="50"
  				   name="query" value="" id="query" />
  		</div>
+		<!-- Two buttons with seperate functions -->
  		<button class="btn btn-primary" type="submit" name="submit"
  						value="Search">Image Search</button>
 		<button class="btn btn-secondary" type="submit" name="submit" formaction="{% url 'search' %}"
  						value="Search">Normal Search</button>				
  		</form>
+		<!-- Shows the image results with the downside that it does not show the images
+		themselves but rather an url to the actual thumbnail -->
  		<div>
 		{{ total_results }} results in {{ search_time }} seconds
  			{% if results %}

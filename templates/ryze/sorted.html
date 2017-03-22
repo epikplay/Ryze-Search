@@ -13,21 +13,25 @@
  			<input class="form-control" type="text" size="50"
  				   name="query" value="" id="query" />
  		</div>
+		<!-- Two buttons with seperate functions -->
  		<button class="btn btn-primary" type="submit" name="submit"
  						value="Search">Sorted Search</button>
 		<button class="btn btn-secondary" type="submit" name="submit" formaction="{% url 'search' %}"
  						value="Search">Normal Search</button>				
  		</form>
+		<!-- This div contains the refinement buttons which are currently under construction -->
  		<div>
 		{% for refinement_list in refinements %}
 			{% for refinement_dict in refinement_list %}
 				{% for refinement in refinement_dict %}
 					<button class="btn btn-secondary" type="submit" name="submit" form="search_form"
- 						value="Refine">{{ refinement.anchor }}</button>
+ 						formaction="{% url 'construction' %}" value="Refine">{{ refinement.anchor }}</button>
 				{% endfor %}
 			{% endfor %}
 		{% endfor %}
+		<!-- Show how many results were found by the search in what time -->
 		{{ total_results }} results in {{ search_time }} seconds
+		<!-- Renders all the results with the set attributes, currently pagination is not available -->
  			{% if results %}
  			<div class="list-group">
  			{% for result in results %}

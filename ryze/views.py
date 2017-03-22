@@ -6,22 +6,26 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
+# Creating an instance of the googlecse class with my ID and API key
+# Do not use the API key nor the ID since I will know and tell Google
 cse_instance = googlecse(CSE_ID='004192970191558059822:zzokqrg_eni',
                              API_KEY='AIzaSyAjz8fLDQBNlMBLljPS8Q8VhIMYqU_opH8')
 
 
-# Create your views here.
 def index(request):
     context_dict = {}
     return render(request, 'ryze/index.html', context=context_dict)
 
 
+# The main method which provides the search function
 def search(request):
-
+    # set all variables to nothing, we will need them later
     results = []
     refinements = ''
     time = 0
     total_results = 0
+    # if there is a POST request, get the query and set the variables with
+    # the new values which are gathered from the googlecse class
     if request.method == 'POST':
         query = request.POST['query'].strip()
         if query:
@@ -31,12 +35,16 @@ def search(request):
             total_results = cse_instance.formatted_total_results
             for result in result_list:
                 results = result
+    # render the results on the appropriate page
     return render(request, 'ryze/search.html', {'search_time': time,
                                                 'total_results': total_results,
                                                 'refinements': refinements,
                                                 'results': results})
 
 
+# This method provides image search functionality
+# it is the same with the main method with small tweaks
+# that is why there is a lot of code redundancy
 def image_search(request):
 
     results = []
@@ -45,7 +53,7 @@ def image_search(request):
     if request.method == 'POST':
         query = request.POST['query'].strip()
         if query:
-            result_list = cse_instance.image_results(query=query)
+            result_list = cse_instance.image_results(query=query)  # here is the difference, it calls a different method
             time = cse_instance.formatted_search_time
             total_results = cse_instance.formatted_total_results
             for result in result_list:
@@ -55,6 +63,11 @@ def image_search(request):
                                                       'results': results})
 
 
+# This method provides sorted search functionality
+# it is the same with the other methods with small tweaks
+# that is why there is a lot of code redundancy
+# by sorted search I mean sorted by date because the normal search
+# is already sorted by relevance
 def sorted_search(request):
     results = []
     refinements = ''
@@ -63,7 +76,8 @@ def sorted_search(request):
     if request.method == 'POST':
         query = request.POST['query'].strip()
         if query:
-            result_list = cse_instance.sorted_results(query=query)
+            result_list = cse_instance.sorted_results(query=query)  # here is the difference,
+                                                                    # it calls a different method
             refinements = cse_instance.refinements_list
             time = cse_instance.formatted_search_time
             total_results = cse_instance.formatted_total_results
@@ -73,6 +87,11 @@ def sorted_search(request):
                                                 'total_results': total_results,
                                                 'refinements': refinements,
                                                 'results': results})
+
+
+# Simple method used for parts which are currently under construction (Refinements)
+def under_construction(request):
+    return render(request, 'ryze/under-construction.html')
 
 
 def register(request):

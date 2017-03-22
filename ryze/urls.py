@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^login/$', views.user_login, name='login'),
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^image-search/$', views.image_search, name='image-search'),
-    url(r'^sorted/$', views.sorted_search, name='sorted')
+    url(r'^sorted/$', views.sorted_search, name='sorted'),
+    url(r'^construction', views.under_construction, name='construction')
 ]

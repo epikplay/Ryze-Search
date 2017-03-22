@@ -2,6 +2,11 @@ import urllib
 import json
 
 
+# All the parameters, properties and implementation tips can be found here:
+# https://developers.google.com/custom-search/json-api/v1/reference/cse/list
+# There is a lot of code redundancy between the different results methods because
+# they provide slightly different functionality and must comply with the
+# Google CSE API so I do not know how it can be refactored
 class googlecse(object):
     def __init__(self, CSE_ID, API_KEY):
         self.CSE_ID = CSE_ID
@@ -31,11 +36,11 @@ class googlecse(object):
         # If the page parameter is less than 11, increment the pages
         try:
             if (kwargs['pages'] < 11) and (round(kwargs['pages']) == kwargs['pages']):
-                self.query_loop = kwargs['pages']
+                self.loop = kwargs['pages']
             else:
-                self.query_loop = 1
+                self.loop = 1
         except:
-            self.query_loop = 1
+            self.loop = 1
 
         return self.search_string
 
@@ -45,7 +50,7 @@ class googlecse(object):
         result_list = []
         self.refinements_list = []
 
-        for index in range(0, self.query_loop):
+        for index in range(0, self.loop):
             if index == 0:
                 current_loaded_url = loaded_url
             else:
@@ -71,12 +76,15 @@ class googlecse(object):
             # If the total possible pages are less than the number of pages that
             # have been requested, end this for-loop early at this point,
             # because it is pointless to make more requests
+            # Essentially the search engine can return a maximum of ten pages even
+            # if the results are 1 million
+            # Downside is that I do not know how to display the pagination yet
             if (float(self.total_results) % 10) > 1:
                 total_pages = (float(self.total_results) / 10) + 1
             else:
                 total_pages = float(self.total_results) / 10
 
-            if (self.query_loop > total_pages) and (index == total_pages):
+            if (self.loop > total_pages) and (index == total_pages):
                 break
             else:
                 pass
@@ -122,7 +130,7 @@ class googlecse(object):
         except:
             pass
 
-        # The image results
+        # The sorted results
         result_list.append(data['items'])
 
         return result_list
