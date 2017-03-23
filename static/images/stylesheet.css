@@ -1,0 +1,163 @@
+#logo{height:345px;outline:none;width:432px;margin:auto;}
+#logo-c{background-image:url(../../static/images/logo.jpeg);
+		background-size:contain;height:100%;width:100%;display:block}
+#searchform{margin-top:0;position:relative;top:0px;left:80px;width:580px;margin:auto}
+#id_username{position:relative; left:26px;border: 2px solid blue; border-radius:4px;}
+#id_password{position:relative; left:29px;border: 2px solid blue; border-radius:4px;}
+#id_email{border: 2px solid blue; border-radius:4px;}
+.form-control{
+	border: 2px solid blue; 
+	border-radius:4px;
+	height:25px;
+}
+.btn{ background-color: #008CBA; /* Blue */
+	border: none;
+	color: white;
+	padding: 10px 24px;
+	border-radius: 4px;
+	text-align: center;
+	display: inline-block;
+	font-size: 10px;
+	position:relative;
+	left: 390px;
+	top:-32px;
+}
+.btn:hover{
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.btn2:hover{
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.regbtn{background-color: #008CBA; /* Blue */
+	border: none;
+	color: white;
+	padding: 10px 24px;
+	border-radius: 4px;
+	text-align: center;
+	display: inline-block;
+	font-size: 10px;
+	position: absolute;
+	top: 20px;
+	right:40px;
+}
+.lognbtn{background-color: #008CBA; /* Blue */
+	border: none;
+	color: white;
+	padding: 10px 24px;
+	border-radius: 4px;
+	text-align: center;
+	display: inline-block;
+	font-size: 10px;
+	position: absolute;
+	top: 20px;
+	right:130px;
+}
+.logtbtn{background-color: #008CBA; /* Blue */
+	border: none;
+	color: white;
+	padding: 10px 24px;
+	border-radius: 4px;
+	text-align: center;
+	display: inline-block;
+	font-size: 10px;
+	position: absolute;
+	top: 20px;
+	right:40px;
+}
+.form-inline{ 
+	position:fixed
+}
+.btn2{background-color: #008CBA; /* Blue */
+	border: none;
+	color: white;
+	padding: 10px 24px;
+	border-radius: 4px;
+	text-align: center;
+	display: inline-block;
+	font-size: 10px;
+	position:relative;
+	left:390px;
+	top:-31px;
+}
+.refbtn{
+	background-color: #008CBA; /* Blue */
+	border: none;
+	color: white;
+	padding: 10px 24px;
+	border-radius: 4px;
+	text-align: center;
+	display: inline-block;
+	font-size: 10px;
+	position:relative;
+	top:32px;
+}
+.restime{
+	position:relative;
+	top:50px;
+}
+.list-group{
+	position:relative;
+	top:60px;
+}
+.list-group-item-link{
+	color:#009933; /* Dark Green */
+	position:relative;
+	left:0px;
+}
+.list-group-item-text{
+	position:relative;
+	left:0px;
+}
+h1 {
+	text-align: center;
+}
+p {
+	position:relative;
+	left:800px;
+}
+.regbtn2{
+	background-color: #008CBA; /* Blue */
+	border: none;
+	color: white;
+	padding: 10px 24px;
+	border-radius: 4px;
+	text-align: center;
+	display: inline-block;
+	font-size: 10px;
+	position:relative;
+	left: 800px;
+	top:-10px;
+}
+.helptext{
+	display:none;
+}
+.subbtn{
+	background-color: #008CBA; /* Blue */
+	border: none;
+	color: white;
+	padding: 10px 24px;
+	border-radius: 4px;
+	text-align: center;
+	display: inline-block;
+	font-size: 10px;
+	position:relative;
+	left: 800px;
+	top:-10px;
+}
+.image {
+	position:relative;
+	left:500px;
+	top:250px;
+	margin:auto;
+}
+img {
+	width:1000px;
+}
+.registered{
+	position:relative;
+	left:760px;
+}
+.errorlist{
+	position:relative;
+	left:760px;
+}

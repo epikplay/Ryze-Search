@@ -5,44 +5,28 @@
 {% endblock %}
 
 {% block body_block %}
-	<div class="content" id="main">
-		<div style="height:233px;margin-top:89px" id="lgo">
-			<style>
-				#logo{height:345px;outline:none;width:432px;margin:auto;}
-				#logo-c{background-image:url(../../static/images/logo.jpeg);
-				background-size:contain;height:100%;width:100%;display:block}
-			</style>
-			<div id="logo" title="Search Engine Logo">
-				<canvas id="logo-c" width="432" height="345" style="background:transperent;">
+	<h2>
+	{% if user.is_authenticated %}
+		Hi, {{user.username}}!
+	{% endif %}
+	</h2>
+	<div id="logo" title="Search Engine Logo">
+		<canvas id="logo-c" width="432" height="345">
+	</div>
+	<div id="searchform">
+		<form action="{% url 'search' %}" style="overflow:visible" id="form" method="post"
+			role="search">
+			{% csrf_token %}
+			<div class="form-group">
+				<input class="form-control" type="text" size="50"
+						name="query" value="" id="query" required />
 			</div>
-		</div>
-		<div id="searchform">
-			<style>
-				#searchform{margin-top:0;position:relative;top:80px;width:580px;margin:auto}
-				.btn{ background-color: #008CBA; /* Blue */
-					border: none;
-					color: white;
-					padding: 10px 24px;
-					border-radius: 8px;
-					text-align: center;
-					display: inline-block;
-					font-size: 10px;
-					}
-			</style>
-			<form action="{% url 'search' %}" style="overflow:visible" id="form" method="post"
-				role="search">
-				{% csrf_token %}
-				<div class="form-group">
-					<input class="form-control" type="text" size="50"
-						   name="query" value="" id="query" />
-				</div>
-				<!-- Two buttons, each for the respective search, pressing Enter will execute 
-				the normal search -->
-				<button class="btn" type="submit" name="submit"
- 				 	    value="Search">Search</button>
-				<button class="btn" type="submit" name="submit" formaction="{% url 'image-search' %}"
- 				 	    value="Search">Image Search</button>		
-			</form>
-		</div>
+			<!-- Two buttons, each for the respective search, pressing Enter will execute 
+			the normal search -->
+			<button class="btn" type="submit" name="submit"
+ 				 	 value="Search">Search</button>
+			<button class="btn" type="submit" name="submit" formaction="{% url 'image-search' %}"
+ 				 	 value="Search">Image Search</button>		
+		</form>		
 	</div>
 {% endblock %}

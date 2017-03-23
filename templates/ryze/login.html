@@ -3,19 +3,25 @@
 <html>
 	<head lang="en">
 		<meta charset="UTF-8" />
+		<link rel="stylesheet" type="text/css" href="../../static/images/stylesheet.css" />
 		<title>
 		Ryze Search
 		</title>
 	</head>
 	<body>
 		<h1>Login to Ryze Search</h1>
-		<form id="login_form" method="post" action="{% url 'login' %}">
+		<div id="logo" title="Search Engine Logo">
+			<canvas id="logo-c" width="432" height="345">
+		</div>
+		<form id="login_form" method="post" action="{% url 'login' %}" >
 			{% csrf_token %}
-			Username: <input type="text" name="username" value="" size="50" />
+			<p>
+			Username: <input id="id_username" type="text" name="username" value="" size="50" required />
 			<br />
-			Password: <input type="password" name="password" value="" size="50" />
+			Password: <input id="id_password" type="password" name="password" value="" size="50" required />
 			<br />
-			<input type="submit" value="submit" />
+			</p>
+			<input class="subbtn" type="submit" value="submit" />
 		</form>
 	</body>
 </html>

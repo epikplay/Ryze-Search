@@ -4,6 +4,7 @@
 <html>
 	<head lang="en">
 		<meta charset="UTF-8" />
+		<link rel="stylesheet" type="text/css" href="../../static/images/stylesheet.css" />
 		<title>
 		{% block title_block %}
 		Ryze Search
@@ -14,14 +15,15 @@
 		{% block body_block %}
 		{% endblock %}
 		<div>
-			<ul>
 			{% if user.is_authenticated %}
-				<li><a href="{% url 'logout' %}">Logout</a></li>
+				<button class="logtbtn" type="button" onclick="location.href='{% url 'logout' %}'"
+				value="Logout">Logout</button>
 			{% else %}
-				<li><a href="{% url 'register' %}">Register</a></li>
-				<li><a href="{% url 'login' %}">Login</a><li>
+				<button class="regbtn" type="button" onclick="location.href='{% url 'register' %}'"
+				value="Register">Register</button>
+				<button class="lognbtn" type="button" onclick="location.href='{% url 'login' %}'"
+				value="Login">Login</button>
 			{% endif %}
-			</ul>
 		</div>
 	</body>
 </html>
