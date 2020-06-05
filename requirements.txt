@@ -2,7 +2,7 @@
 
 appdirs==1.4.3
 
-Django==1.9.10
+Django==1.11.29
 
 google-api-python-client==1.6.2
 
