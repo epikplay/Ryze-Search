@@ -24,7 +24,7 @@ pyparsing==2.2.0
 
 requests==2.13.0
 
-rsa==3.4.2
+rsa==4.1
 
 six==1.10.0
 
